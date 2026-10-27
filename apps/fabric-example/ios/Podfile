@@ -13,6 +13,11 @@ require Pod::Executable.execute_command('node', ['-p',
 platform :ios, min_ios_version_supported
 prepare_react_native_project!
 
+linkage = ENV['USE_FRAMEWORKS']
+if linkage != nil
+  use_frameworks! :linkage => linkage.to_sym
+end
+
 # Relative path from ios/ to the hoisted react-native package. Must stay relative:
 # react_native_post_install joins it as File.join("${PODS_ROOT}", "..", path), and an
 # absolute path there produces a broken REACT_NATIVE_PATH in the Pods project.
